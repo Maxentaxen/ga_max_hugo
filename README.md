@@ -22,3 +22,6 @@ conv_lstm_satellite
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for more details.
+
+
+https://docs.google.com/document/d/1ORn3F6_LzKLvk1_01Ww31dBzyG5ocg5WCOi-uu-L2bA/edit?tab=t.0
