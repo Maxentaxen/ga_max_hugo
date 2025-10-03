@@ -18,6 +18,7 @@ def train_model(model, dataloader, criterion, optimizer, num_epochs):
         running_loss = 0.0
         for inputs, targets in dataloader:
             optimizer.zero_grad()
+            # inputs: (batch, seq_len, 1, H, W)
             outputs = model(inputs)
             loss = criterion(outputs, targets)
             loss.backward()

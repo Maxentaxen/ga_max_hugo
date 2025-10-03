@@ -1,11 +1,12 @@
-learning_rate: 0.001
-batch_size: 16
-num_epochs: 50
-dataset_path: "path/to/satellite/images"
-input_size: [512, 512]  # Height, Width of the input images
-num_channels: 1
-hidden_size: 64  # Number of features in the hidden state
-num_layers: 3  # Number of ConvLSTM layers
-dropout: 0.2  # Dropout rate for regularization
-validation_split: 0.2  # Fraction of the dataset to be used for validation
-save_model_path: "src/models/"
+dataset:
+  path: "path/to/satellite/folder_dataset"
+model:
+  input_dim: 1
+  hidden_dim: 64
+  output_dim: 1
+  kernel_size: 3
+  num_layers: 3
+training:
+  batch_size: 16
+  learning_rate: 0.001
+  num_epochs: 50
