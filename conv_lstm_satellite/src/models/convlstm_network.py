@@ -15,16 +15,15 @@ class ConvLSTMNetwork(nn.Module):
         self.fc = nn.Conv2d(hidden_dim, output_dim, kernel_size=1)
 
     def forward(self, x):
-        batch_size, seq_len, _, _, _ = x.size()
+        batch_size, seq_len, _, height, width = x.size()
         hidden_states = [None] * self.num_layers
-        
+
         for t in range(seq_len):
             for i in range(self.num_layers):
-                if hidden_states[i] is None:
-                    hidden_states[i] = self.convlstm_cells[i](x[:, t, :, :, :], hidden_states[i])
-                else:
-                    hidden_states[i] = self.convlstm_cells[i](hidden_states[i][0], hidden_states[i])
-        
+                # input to layer 0 is the raw input; for others use previous layer's hidden state
+                layer_input = x[:, t, :, :, :] if i == 0 else hidden_states[i-1][0]
+                hidden_states[i] = self.convlstm_cells[i](layer_input, hidden_states[i])
+
         output = self.fc(hidden_states[-1][0])
         return output
 

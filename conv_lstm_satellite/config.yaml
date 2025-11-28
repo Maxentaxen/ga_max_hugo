@@ -1,5 +1,5 @@
 dataset:
-  path: "path/to/satellite/folder_dataset"
+  path: "C:/Users/Max/Documents/Github/ga_max_hugo/conv_lstm_satellite/data"
 model:
   input_dim: 1
   hidden_dim: 64

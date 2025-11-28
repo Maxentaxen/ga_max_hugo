@@ -6,10 +6,10 @@ from PIL import Image
 import numpy as np
 
 class SatelliteDataset(Dataset):
-    def __init__(self, root_dir):
+    def __init__(self, root_dir, resize=(256,256)):
         self.root_dir = root_dir
         self.folder_paths = []
-        # Walk through all subdirectories
+        self.resize=resize
         for dirpath, dirnames, filenames in os.walk(root_dir):
             image_files = sorted(glob.glob(os.path.join(dirpath, '*.png')))
             if len(image_files) == 4:
@@ -27,6 +27,9 @@ class SatelliteDataset(Dataset):
         input_seq = []
         for img_path in image_files[:3]:
             img = Image.open(img_path).convert('L')
+            if self.resize:
+                img = img.resize(self.resize, Image.BILINEAR)
+            
             img = np.array(img, dtype=np.float32) / 255.0
             img = torch.from_numpy(img).unsqueeze(0)  # (1, H, W)
             input_seq.append(img)
@@ -34,12 +37,12 @@ class SatelliteDataset(Dataset):
 
         # Load 4th image as target
         target_img = Image.open(image_files[3]).convert('L')
+        target_img = target_img.resize(self.resize, Image.BILINEAR)
         target_img = np.array(target_img, dtype=np.float32) / 255.0
         target_img = torch.from_numpy(target_img).unsqueeze(0)  # (1, H, W)
 
         return input_seq, target_img
 
-# Example usage
 if __name__ == "__main__":
-    dataset = SatelliteDataset(root_dir='path/to/satellite/root')
+    dataset = SatelliteDataset(root_dir='C:/Users/Max/Documents/Github/ga_max_hugo/conv_lstm_satellite/data')
     print(f'Dataset size: {len(dataset)}')
