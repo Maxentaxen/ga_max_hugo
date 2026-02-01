@@ -11,7 +11,9 @@ import time
 t_start = time.time()
 elapsed_times = []
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = PROJECT_ROOT / 'data'
+
+# Check for data directory from environment variable or use default
+DATA_DIR = Path(os.getenv('SATELLITE_DATA_DIR', PROJECT_ROOT / 'data'))
 CHECKPOINT_DIR = PROJECT_ROOT / 'checkpoints'
 
 OUTPUT_DIR = PROJECT_ROOT / 'predictions'
@@ -138,8 +140,13 @@ if __name__ == '__main__':
     parser.add_argument('date_hour', type=str, help='Date and hour in format YYYY/MM/DD/HH (e.g., 2024/09/21/15)')
     parser.add_argument('--checkpoint', type=str, default=None, help='Path to checkpoint file. If not provided, uses latest.')
     parser.add_argument('--device', type=str, default=None, help='Device to use (cuda or cpu). If not provided, auto-detects.')
+    parser.add_argument('--data-dir', type=str, default=None, help='Path to data directory (e.g., /Volumes/USB_DRIVE/data or D:/USB_DRIVE/data)')
     
     args = parser.parse_args()
+    
+    # Override DATA_DIR if provided
+    if args.data_dir:
+        DATA_DIR = Path(args.data_dir)
     
     device = None
     if args.device:
