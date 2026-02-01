@@ -9,7 +9,6 @@ folders = [
     Path('conv_lstm_satellite/predictions/diffs'),
 ]
 
-
 columns = []
 
 for folder in folders:
@@ -29,7 +28,7 @@ for col_idx, imgs in enumerate(columns):
     for row_idx in range(n_rows):
         ax = axes[row_idx, col_idx]
         if row_idx < len(imgs):
-            lum_img = np.asarray(imgs[row_idx])[:, :, 0]
+            lum_img = np.asarray(imgs[row_idx])
             ax.imshow(lum_img)
         ax.axis("off")
 max_values = []
