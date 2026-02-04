@@ -34,8 +34,8 @@ for col_idx, imgs in enumerate(columns):
 max_values = []
 
 for image in columns[2]:
-    max_values.append(np.max(image))
+    max_values.append(1 - np.mean(image)/(255))
 for ax, title in zip(axes[0], titles):
     ax.set_title(title)
-print(f'Highest single-pixel difference in each image: {np.array(max_values)}')
+print(f'Whiteness: {np.mean(max_values)}')
 plt.show()
