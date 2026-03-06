@@ -1,0 +1,12 @@
+dataset:
+  path: "C:/Users/Max/Documents/Github/ga_max_hugo/conv_lstm_satellite/data"
+model:
+  input_dim: 1
+  hidden_dim: 64
+  output_dim: 1
+  kernel_size: 3
+  num_layers: 3
+training:
+  batch_size: 16
+  learning_rate: 0.001
+  num_epochs: 50
