@@ -1,23 +1,37 @@
 # Satellitbildanalys med ConvLSTM
 
-Detta är Max Niemis del av gymnasiearbetet "Kortsiktiga väderprognoser med ML". Här definieras ML-modellen och dess träningsruting samt dataöverfaring till och bort.
+Detta är Max Niemis del av gymnasiearbetet "Kortsiktiga väderprognoser med ML". Här definieras ML-modellen och dess träningsruting samt bildgenerering.
 
 
 ## Projektstruktur
 
 ```
 conv_lstm_satellite
+├──checkpoints
+|   └── checkpoint_epoch_50.pth  # Senaste versionen av modellen
+├── data                         # All data (45154 undermappar)
+|   ├── 2020
+|   ├── 2021
+|   ├── 2022
+|   ├── 2023
+|   ├── 2024
+|   └── 2025
+├── predictions
+|   ├──  diffs                     # Differensbilder som sparas efter att man kör predict.py
+|   ├──  preds                     # Bilderna som genereras när man kör predict.py
+|   └── targets                    # Målbilden som kopieras hit när man kör predict.py
 ├── src
 │   ├── dataset
 │   │   └── satellite_dataset.py  # Egen klass för att skapa datasetet
 │   ├── models
 │   │   └── convlstm_network.py     # Nätverkets definition
+|   ├── predict.py                  # Kör nätverket vid en viss tidspunkt
 │   ├── train.py                    # Modellens träningsrutin
+|   ├── viewpreds.py                # Visar alla bilder i /predictions i ett rutnät
 │   └── utils
 │       └── __init__.py            # init-fil
-└── config.yaml                     # Konfigurationsfil för hyperparametrar samt diverse filsökvägar
 ```
-
+För att köra predict.py, navigera till /src och kör `python predict.py ÅÅÅÅ/MM/DD/HH `, valfria argument: (`--cmap` följt av valfritt cmap-värde från matplotlib, `--p` följt av 1 eller 0 för lite ascii i början)  
 
 ## License
 
