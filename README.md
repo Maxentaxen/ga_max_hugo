@@ -30,6 +30,8 @@ conv_lstm_satellite
 |   ├── viewpreds.py                # Visar alla bilder i /predictions i ett rutnät
 │   └── utils
 │       └── __init__.py            # init-fil
+image_downloader
+└──prog.py                         # Program för att ladda ner bilder mellan två datum
 ```
 För att köra predict.py, navigera till /src och kör `python predict.py ÅÅÅÅ/MM/DD/HH `, valfria argument: (`--cmap` följt av valfritt cmap-värde från matplotlib, `--p` följt av 1 eller 0 för lite ascii i början)  
 
