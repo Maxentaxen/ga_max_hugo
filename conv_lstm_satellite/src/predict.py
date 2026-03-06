@@ -12,7 +12,6 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 from models.convlstm_network import ConvLSTMNetwork
 
-t_start = time.time()
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 DATA_DIR = Path(os.getenv('SATELLITE_DATA_DIR', PROJECT_ROOT / 'data'))
@@ -31,6 +30,7 @@ def type_text(text, delay=0.1):
         sys.stdout.flush()
         time.sleep(delay)
         i += 1
+        
 
 def load_checkpoint(path, model, device=None):
     if device is None:
@@ -98,7 +98,9 @@ def predict(date_hour, device=None, cmap='viridis', print_ascii=1):
     date_array = date_hour.split('/')
     pictures = [target_img_pil, pred_img, diff_img]
     titles = ["Target", "Prediction", "Difference"]
-    plt.suptitle(f'Date: {date_array[2]}  {months[int(date_array[1]) - 1]}  {date_array[0]} {date_array[3]}:00 \n MAE: {mae}')
+    fig.text(0.5, 0.85, f'Date: {date_array[2]}  {months[int(date_array[1]) - 1]}  {date_array[0]} {date_array[3]}:00 \n MAE: {mae}', horizontalalignment="center")
+    plt.suptitle("CLOUDCLANKER 3000", y=0.975, fontsize=24)
+    
 
     for pic in range(0,3):
         ax = axes[pic]
@@ -108,7 +110,7 @@ def predict(date_hour, device=None, cmap='viridis', print_ascii=1):
     return t_end - t_start
 
 if __name__ == '__main__':
-    os.system("cls" if os.name == "nt" else "clear")
+    os.system("cls")
     parser = argparse.ArgumentParser(description='Run inference on a satellite data folder.')
     parser.add_argument('date_hour', type=str, help='Date and hour in format YYYY/MM/DD/HH (e.g., 2024/09/21/15)')
     parser.add_argument('--device', type=str, default='cuda', help='Device to use (cuda or cpu). If not provided, auto-detects.')
@@ -142,6 +144,6 @@ if __name__ == '__main__':
         DATA_DIR = Path(args.data_dir)
     device = torch.device(args.device) if args.device else None
     elapsed_time = predict(args.date_hour, device=device, cmap=args.cmap, print_ascii=args.p)
-    print(f'Time elapsed: {elapsed_time} seconds')
+    print(f'Time elapsed: {elapsed_time - args.p*2} seconds')
     plt.show()
     os.system("cls" if os.name == "nt" else "clear")
