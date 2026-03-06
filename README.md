@@ -1,6 +1,8 @@
-# Satellitbildanalys med ConvLSTM
+# Hämtning och analys av sattelitbilder med ConvLSTM
 
-Detta är Max Niemis del av gymnasiearbetet "Kortsiktiga väderprognoser med ML". Här definieras ML-modellen och dess träningsruting samt bildgenerering.
+Inuti image_downloader defineras hämtningen av sattelitbilder från eumetsat.int. Detta är Hugo Larsson del av gymnasiearbetet "Kortsiktiga väderprognoser med ML".
+
+Inuti conv_lstm_satellite definieras ML-modellen och dess träningsruting samt bildgenerering. Detta är Max Niemis del av gymnasiearbetet "Kortsiktiga väderprognoser med ML".
 
 
 ## Projektstruktur
@@ -31,10 +33,11 @@ conv_lstm_satellite
 │   └── utils
 │       └── __init__.py            # init-fil
 image_downloader
-└──prog.py                         # Program för att ladda ner bilder mellan två datum
+└──downloader.py                         # Program för att ladda ner bilder mellan två datum
 ```
 För att köra predict.py, navigera till /src och kör `python predict.py ÅÅÅÅ/MM/DD/HH `, valfria argument: (`--cmap` följt av valfritt cmap-värde från matplotlib, `--p` följt av 1 eller 0 för lite ascii i början)  
 
+Bildhämtningen i downloader.py konfigureras via parametrar på rad 6–26 där användaren kan ange WMS-endpoint (WMS_URL), bildlager (LAYER), tidsperiod och tidssteg för nedladdning (START_TIME, END_TIME, TIME_STEP), startindex för filnumrering (count), samt geografiskt bounding box (BBOX) och bildens upplösning (WIDTH, HEIGHT).
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for more details.
