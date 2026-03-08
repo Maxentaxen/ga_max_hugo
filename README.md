@@ -10,8 +10,8 @@ Inuti conv_lstm_satellite definieras ML-modellen och dess träningsruting samt b
 ```
 conv_lstm_satellite
 ├──checkpoints
-|   └── checkpoint_epoch_50.pth  # Senaste versionen av modellen
-├── data                         # All data (45154 undermappar)
+|   └── checkpoint_epoch_50.pth  # Senaste versionen av modellen, används i predict.py
+├── data                         # Bilderna sparas och hämtas härifrån
 |   ├── 2020
 |   ├── 2021
 |   ├── 2022
@@ -23,6 +23,7 @@ conv_lstm_satellite
 |   ├──  preds                     # Bilderna som genereras när man kör predict.py
 |   └── targets                    # Målbilden som kopieras hit när man kör predict.py
 ├── src
+|   ├── checkpoints # Här sparas nätverket efter varje epok
 │   ├── dataset
 │   │   └── satellite_dataset.py  # Egen klass för att skapa datasetet
 │   ├── models
