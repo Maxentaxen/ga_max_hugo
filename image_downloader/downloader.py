@@ -10,7 +10,7 @@ START_TIME = datetime(2025, 10, 2, 0, 0)  # justerat startdatum
 END_TIME = datetime(2025, 11, 2, 0, 0)     # slutpunkt (exkluderande)
 TIME_STEP = timedelta(minutes=15)
 count = int(60056) # ändra till senasts bild som sparats innan start
-os.chdir('conv_lstm_satellite/data')
+os.chdir('conv_lstm_satellite/data') # ändra till rätt rotmapp
 def fetch_image_for_time(dt: datetime):
     """Försök hämta bilden för den exakta tiden dt."""
     params = {
