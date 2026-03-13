@@ -100,7 +100,9 @@ def predict(date_hour, device=None, cmap='viridis', print_ascii=1):
     titles = ["Target", "Prediction", "Difference"]
     fig.text(0.5, 0.85, f'Date: {date_array[2]}  {months[int(date_array[1]) - 1]}  {date_array[0]} {date_array[3]}:00 \n MAE: {mae}', horizontalalignment="center")
     plt.suptitle("CLOUDCLANKER 3000", y=0.975, fontsize=24)
-    
+    diff_img.save(OUTPUT_DIR / 'diffs' /  f'{date_hour.replace("/", "_")}_difference.png')
+    pred_img.save(OUTPUT_DIR / 'preds' /  f'{date_hour.replace("/", "_")}_prediction.png')
+    target_img_pil.save(OUTPUT_DIR / 'targets' /  f'{date_hour.replace("/", "_")}_target.png')
 
     for pic in range(0,3):
         ax = axes[pic]
